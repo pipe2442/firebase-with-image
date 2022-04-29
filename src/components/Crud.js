@@ -3,6 +3,12 @@ import { firebase } from "../firebase";
 import { useForm } from "react-hook-form";
 
 function PeopleList({ list, deleteUser, update }) {
+
+  // function getRandomInt(max) {
+  //   return Math.floor(Math.random() * max);
+  // }
+
+  // const url = "https://picsum.photos/"+getRandomInt(1000)+"/1/200/300"
   return (
     <div class="w-full mx-auto flex my-8 flex-wrap">
       {list.map((user) => (
@@ -13,6 +19,9 @@ function PeopleList({ list, deleteUser, update }) {
           <div class="mb-4">
             <div class="block text-gray-700 text-sm font-bold mb-2">
               <h3>{user.name}</h3>
+            </div>
+            <div>
+              <img src={user.img} alt="test img" />
             </div>
             <div class="block text-gray-700 text-sm font-bold mb-2">
               <p>{user.username}</p>
@@ -73,6 +82,7 @@ function Form({ recall, setRecall, user, updateForm, setUpdateForm }) {
         name: user.name,
         password: user.password,
         username: user.username,
+        img: user.img,
       });
     } catch (error) {
       console.log(error);
@@ -104,6 +114,12 @@ function Form({ recall, setRecall, user, updateForm, setUpdateForm }) {
     setUpdateForm(false)
   }
   console.warn('EDIT USER', user)
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  const url = "https://picsum.photos/"+getRandomInt(1000)+"/1/200/300"
 
   return (
     <>
@@ -200,6 +216,20 @@ function Form({ recall, setRecall, user, updateForm, setUpdateForm }) {
               type="password"
               placeholder="******************"
               {...register("password", { required: true })}
+            />
+            {errors.password && <span>This field is required</span>}
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+              Img url
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="img"
+              type="text"
+              value={url}
+              placeholder={updateForm ? user.img : "User Image url"}
+              {...register("img", { required: true })}
             />
             {errors.password && <span>This field is required</span>}
           </div>
