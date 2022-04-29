@@ -21,7 +21,7 @@ function PeopleList({ list, deleteUser, update }) {
               <h3>{user.name}</h3>
             </div>
             <div>
-              <img src={user.img} alt="test img" />
+              <img src={user.img} alt="test img" className="rounded-full my-6"/>
             </div>
             <div class="block text-gray-700 text-sm font-bold mb-2">
               <p>{user.username}</p>
@@ -113,13 +113,23 @@ function Form({ recall, setRecall, user, updateForm, setUpdateForm }) {
     reset()
     setUpdateForm(false)
   }
-  console.warn('EDIT USER', user)
+
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
 
-  const url = "https://picsum.photos/"+getRandomInt(1000)+"/1/200/300"
+  useEffect(() => {
+    fetch("https://picsum.photos/v2/list?page=1&limit=100")
+    .then(response => response.json())
+    .then(data => {
+      const index = getRandomInt(100)
+      setId(data[index].id)
+    })
+  }, [recall])
+
+  const [id, setId] = useState(0)
+  const url = "https://picsum.photos/id/"+id+"/200"
 
   return (
     <>
@@ -188,7 +198,7 @@ function Form({ recall, setRecall, user, updateForm, setUpdateForm }) {
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="country"
               type="text"
-              placeholder={updateForm ? user.address : "Address"}
+              placeholder={updateForm ? user.country : "Country"}
               {...register("country", { required: true })}
             />
             <div className="my-3">{errors.password && <span>This field is required</span>}</div>
@@ -301,7 +311,7 @@ function Crud() {
   return (
     
       <div className="mx-auto">
-        <h1 className="text-lg font-bold text-center my-8">Firebase Users Registration</h1>
+        <h1 className="text-lg font-bold text-center my-8">Firebase Users Registration With Images</h1>
         <Form
           recall={recall}
           setRecall={setRecall}
