@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { firebase } from "../firebase";
 import { useForm } from "react-hook-form";
+import useFetch from "../hooks/useFetch";
 
 function PeopleList({ list, deleteUser, update }) {
 
-  // function getRandomInt(max) {
-  //   return Math.floor(Math.random() * max);
-  // }
-
-  // const url = "https://picsum.photos/"+getRandomInt(1000)+"/1/200/300"
   return (
     <div class="w-full mx-auto flex my-8 flex-wrap">
       {list.map((user) => (
@@ -307,7 +303,10 @@ function Crud() {
     setUpdateUser(user);
     setUpdateForm(true);
   };
+  //https://cat-fact.herokuapp.com/facts
 
+  const {data} = useFetch('https://cat-fact.herokuapp.com/facts')
+  console.warn('data', data)
   return (
     
       <div className="mx-auto">

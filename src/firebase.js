@@ -2,12 +2,12 @@ import firebase from "firebase";
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAFVUbY-7sbSZiOlw43YSoxwuNdXWpet9M",
-  authDomain: "img-demo-82479.firebaseapp.com",
-  projectId: "img-demo-82479",
-  storageBucket: "img-demo-82479.appspot.com",
-  messagingSenderId: "310075940051",
-  appId: "1:310075940051:web:8e4fb514048544099bc826"
+  apiKey: "AIzaSyAJgfM7i92ZIbdmxx9HUx1NA_vrI8i-b7E",
+  authDomain: "imgcoleccion-959d0.firebaseapp.com",
+  projectId: "imgcoleccion-959d0",
+  storageBucket: "imgcoleccion-959d0.appspot.com",
+  messagingSenderId: "323902711038",
+  appId: "1:323902711038:web:f2839649f236990fe9f1af"
 };
 
 firebase.initializeApp(firebaseConfig);
